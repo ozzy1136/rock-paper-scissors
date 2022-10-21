@@ -1,0 +1,228 @@
+:root {
+	text-size-adjust: 100%;
+}
+
+* {
+	&,
+	&::before,
+	&::after {
+		box-sizing: inherit;
+		padding: 0;
+		margin: 0;
+	}
+}
+
+html {
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	position: relative;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+	font-weight: normal;
+}
+
+:where(p) {
+	max-width: 60ch;
+}
+
+:where(small) {
+	font-size: 85%;
+}
+
+:where(b, strong) {
+	font-weight: bolder;
+}
+
+:where(pre) {
+	white-space: pre-wrap;
+}
+
+:where(a) {
+	color: inherit;
+	background-color: transparent;
+}
+
+:where(abbr[title]) {
+	text-decoration: underline;
+	text-decoration: underline dotted;
+}
+
+:where(hr) {
+	box-sizing: content-box;
+	border-style: solid;
+	border-width: 1px 0 0;
+	color: inherit;
+	height: 0;
+	overflow: visible;
+}
+
+:where(nav) :where(ul, ol) {
+	list-style-type: none;
+}
+
+:where(nav li)::before {
+	content: "\200B";
+	position: absolute;
+}
+
+:where(details) {
+	display: block;
+}
+
+:where(summary) {
+	display: list-item;
+}
+
+:where(button, [type="button" i], [type="reset" i], [type="submit" i]) {
+	-webkit-appearance: button;
+}
+
+:where(progress) {
+	vertical-align: baseline;
+}
+
+:where([type="search" i]) {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+:where(img, svg, video, canvas, iframe, input, select, textarea, audio, embed, object) {
+	max-width: 100%;
+}
+
+:where(img, svg, video, canvas, iframe, input, select, textarea) {
+	height: auto;
+}
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+	vertical-align: middle;
+}
+
+:where(picture) {
+	display: contents;
+}
+
+:where(source) {
+	display: none;
+}
+
+:where(svg:not([fill])) {
+	fill: currentColor;
+}
+
+:where(audio, video) {
+	display: inline-block;
+}
+
+:where(audio:not([controls])) {
+	display: none;
+}
+
+:where(canvas) {
+	display: inline-block;
+}
+
+:where(iframe) {
+	border-style: none;
+}
+
+:where(table) {
+	border-collapse: collapse;
+	border-spacing: 0;
+	text-indent: 0;
+	border-color: currentColor;
+}
+
+:where(template) {
+	display: none;
+}
+
+:where([hidden]) {
+	display: none;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+	height: auto;
+}
+
+::-webkit-input-placeholder {
+	color: inherit;
+	opacity: 0.54;
+}
+
+::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+/**
+ * Change the cursor on busy elements in all browsers (opinionated).
+ */
+
+:where([aria-busy="true" i]) {
+	cursor: progress;
+}
+
+/*
+ * Change the cursor on disabled, not-editable, or otherwise
+ * inoperable elements in all browsers (opinionated).
+ */
+
+:where([aria-disabled="true" i], [disabled]) {
+	cursor: not-allowed;
+}
+
+/*
+ * Change the display on visually hidden accessible elements
+ * in all browsers (opinionated).
+ */
+
+:where([aria-hidden="false" i][hidden]) {
+	display: initial;
+	position: absolute;
+}
+
+:where([aria-hidden="false" i][hidden]:not(:focus)) {
+	clip: rect(0, 0, 0, 0);
+}
+
+/*
+*
+* Utility Classes
+*
+*/
+
+/* Fallback for when unable to directly set aria-hidden */
+.sr-only {
+	display: initial;
+	position: absolute;
+}
+
+.sr-only:not(:focus) {
+	clip: rect(0, 0, 0, 0);
+}
+
+.center-children {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-section-container {
+	--content-columns: 1fr;
+	--page-gap-size: 8px;
+
+	display: grid;
+	grid-template-columns:
+		[full-start] var(--page-gap-size) [wrapper-start] var(--content-columns)
+		[wrapper-end] var(--page-gap-size) [full-end];
+}
