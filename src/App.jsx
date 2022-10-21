@@ -1,35 +1,65 @@
-import { useState } from "react";
 import "./App.css";
+import { ReactComponent as Logo } from "./assets/images/logo.svg";
+import { ReactComponent as Triangle } from "./assets/images/bg-triangle.svg";
+import { ReactComponent as IconPaper } from "./assets/images/icon-paper.svg";
+import { ReactComponent as IconScissors } from "./assets/images/icon-scissors.svg";
+import { ReactComponent as IconRock } from "./assets/images/icon-rock.svg";
+import { ReactComponent as IconClose } from "./assets/images/icon-close.svg";
+import { ReactComponent as ImgRules } from "./assets/images/image-rules.svg";
 
-function App() {
-	const [count, setCount] = useState(0);
-
+export default function App() {
 	return (
-		<div className="App">
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-			<footer>
+		<div className="l-page">
+			<main className="page-section-container">
+				<div className="info">
+					<div className="info-heading">
+						<h1 className="sr-only">Rock, paper, scissors</h1>
+						<Logo />
+					</div>
+
+					<div className="info-score">
+						<p aria-live="polite" aria-atomic="true">
+							<span>Score</span>
+							<span>12</span>
+						</p>
+					</div>
+				</div>
+
+				<div className="match">
+					<Triangle />
+					<IconPaper />
+					<IconScissors />
+					<IconRock />
+				</div>
+
+				<div className="rules">
+					<button type="button">Rules</button>
+					<div>
+						<IconClose />
+						<ImgRules />
+					</div>
+				</div>
+			</main>
+
+			<footer className="page-section-container">
 				<div className="attribution">
 					Challenge by{" "}
-					<a href="https://www.frontendmentor.io?ref=challenge">
+					<a
+						className="attribution-link"
+						href="https://www.frontendmentor.io?ref=challenge"
+					>
 						Frontend Mentor
 					</a>
 					. Coded by{" "}
-					<a href="https://github.com/ozzy1136">Ozmar Mendoza</a>.
+					<a
+						className="attribution-link"
+						href="https://github.com/ozzy1136"
+					>
+						Ozmar Mendoza
+					</a>
+					.
 				</div>
 			</footer>
 		</div>
 	);
 }
-
-export default App;
