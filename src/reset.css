@@ -202,27 +202,27 @@ body {
 */
 
 /* Fallback for when unable to directly set aria-hidden */
-.sr-only {
+:where(.sr-only) {
 	display: initial;
 	position: absolute;
 }
 
-.sr-only:not(:focus) {
+:where(.sr-only:not(:focus)) {
 	clip: rect(0, 0, 0, 0);
 }
 
-.center-children {
+:where(.center-children) {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.page-section-container {
-	--content-columns: 1fr;
-	--page-gap-size: 8px;
-
+:where(.page-section-container) {
 	display: grid;
 	grid-template-columns:
-		[full-start] var(--page-gap-size) [wrapper-start] var(--content-columns)
-		[wrapper-end] var(--page-gap-size) [full-end];
+		[full-start] var(--page-gap-size, 8px) [wrapper-start] var(
+			--content-columns,
+			1fr
+		)
+		[wrapper-end] var(--page-gap-size, 8px) [full-end];
 }
