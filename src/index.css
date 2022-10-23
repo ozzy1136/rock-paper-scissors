@@ -12,8 +12,6 @@
 	--c-dark: hsl(229, 25%, 31%);
 	--c-score: hsl(229, 64%, 46%);
 
-	--ol-header: hsl(217, 16%, 45%);
-
 	--ff-semibold: "Barlow Semi Condensed Semi Bold", sans-serif;
 	--ff-bold: "Barlow Semi Condensed Bold", sans-serif;
 
@@ -22,5 +20,13 @@
 	--bgi-paper: radial-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
 	--bgi-rock: radial-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
 
-	--page-gap-size: 10vw;
+	--bdc-header: hsl(217, 16%, 45%);
+
+	--bdrs-soft: 5px;
+
+	--page-gap-size: 8vw;
+}
+
+body {
+	background-image: var(--bgi-page);
 }
