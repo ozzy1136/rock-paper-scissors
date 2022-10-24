@@ -9,21 +9,25 @@
 }
 
 :root {
-	--c-dark: hsl(229, 25%, 31%);
-	--c-score: hsl(229, 64%, 46%);
-
 	--ff-semibold: "Barlow Semi Condensed Semi Bold", sans-serif;
 	--ff-bold: "Barlow Semi Condensed Bold", sans-serif;
 
-	--bgi-page: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+	--c-dark: 229, 25%, 31%;
+	--c-score: 229, 64%, 46%;
+
+	--bgc-loadingToken: 220, 47%, 18%;
+
+	--bdc-header: 217, 16%, 45%;
+	--bdrs-round: 50%;
+	--bdrs-soft: 5px;
+
+	--bgi-page: radial-gradient(
+		hsla(214, 47%, 23%, 0.97),
+		hsl(237, 49%, 15%, 0.97)
+	);
 	--bgi-scissors: radial-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
 	--bgi-paper: radial-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
 	--bgi-rock: radial-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
-
-	--bdc-header: hsl(217, 16%, 45%);
-
-	--bdrs-round: 50%;
-	--bdrs-soft: 5px;
 
 	--page-gap-size: 8vw;
 }
