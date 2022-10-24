@@ -10,51 +10,60 @@ import { ReactComponent as ImgRules } from "./assets/images/image-rules.svg";
 export default function App() {
 	return (
 		<div className="l-page">
-			<main className="page-section-container">
-				<div className="info">
-					<div className="info-heading">
+			<main>
+				<div className="l-info center-children">
+					<div className="heading">
 						<h1 className="sr-only">Rock, paper, scissors</h1>
-						<Logo />
+						<Logo className="logo" />
 					</div>
 
-					<div className="info-score">
-						<p aria-live="polite" aria-atomic="true">
-							<span>Score</span>
-							<span>12</span>
-						</p>
+					<div
+						className="score center-children"
+						aria-live="polite"
+						aria-atomic="true"
+					>
+						<p className="title">Score</p>
+						<p className="value">12</p>
 					</div>
 				</div>
 
-				<div className="match">
-					<Triangle />
-					<IconPaper />
-					<IconScissors />
-					<IconRock />
+				<div className="l-match page-section-container">
+					<Triangle className="background" />
+					<div className="tokens">
+						<div className="token paper">
+							<IconPaper className="icon" />
+						</div>
+						<div className="token scissors">
+							<IconScissors className="icon" />
+						</div>
+						<div className="token rock">
+							<IconRock className="icon" />
+						</div>
+					</div>
 				</div>
 
-				<div className="rules">
-					<button type="button">Rules</button>
-					<div>
+				<div className="l-rules page-section-container">
+					<button className="button" type="button">
+						Rules
+					</button>
+					<div hidden>
 						<IconClose />
 						<ImgRules />
 					</div>
 				</div>
 			</main>
 
-			<footer className="page-section-container">
+			<footer className="l-page-footer page-section-container">
 				<div className="attribution">
 					Challenge by{" "}
 					<a
-						className="attribution-link"
+						className="link"
 						href="https://www.frontendmentor.io?ref=challenge"
 					>
 						Frontend Mentor
 					</a>
 					. Coded by{" "}
-					<a
-						className="attribution-link"
-						href="https://github.com/ozzy1136"
-					>
+					<a className="link" href="https://github.com/ozzy1136">
 						Ozmar Mendoza
 					</a>
 					.
