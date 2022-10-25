@@ -1,3 +1,5 @@
+@import "keyframes-tokens.css";
+
 .l-page {
 	padding-block: 8vh;
 }
@@ -80,20 +82,22 @@
 			&:nth-of-type(1) {
 				background-image: var(--bgi-paper);
 				top: 0%;
-				right: 55%;
+				left: 45%;
+				transform: translate(-100%, 0%);
 			}
 
 			&:nth-of-type(2) {
 				background-image: var(--bgi-scissors);
 				top: 0%;
 				left: 55%;
+				transform: translate(0%, 0%);
 			}
 
 			&:nth-of-type(3) {
 				background-image: var(--bgi-rock);
-				bottom: 0%;
+				top: 100%;
 				left: 50%;
-				transform: translateX(-50%);
+				transform: translate(-50%, -100%);
 			}
 
 			& > .icon {
@@ -136,6 +140,59 @@
 
 		& .link {
 			color: hsl(var(--c-score));
+		}
+	}
+}
+
+/* State Rules */
+.l-match.is-dueling {
+	& > .background {
+		display: none;
+	}
+
+	& > .tokens {
+		& > .token {
+			animation-fill-mode: forwards;
+
+			@media screen and (prefers-reduced-motion: no-preference) {
+				animation-delay: 1ms;
+				animation-duration: 1s;
+			}
+		}
+
+		& > .user {
+			&:nth-of-type(2) {
+				animation-name: move-user-scissors-token;
+			}
+
+			&:nth-of-type(3) {
+				animation-name: move-user-rock-token;
+			}
+		}
+
+		& > .cpu {
+			background: unset;
+
+			&::before {
+				box-shadow: unset;
+				background-color: hsl(var(--bgc-loadingToken));
+			}
+
+			&:nth-of-type(1) {
+				animation-name: move-cpu-paper-token;
+			}
+
+			&:nth-of-type(3) {
+				animation-name: move-cpu-rock-token;
+			}
+
+			& > .icon {
+				display: none;
+			}
+		}
+
+		& > .hidden {
+			display: none;
 		}
 	}
 }
