@@ -44,8 +44,8 @@
 	margin-block: 14vh;
 
 	& > .background {
-		width: 40vw;
-		height: 65%;
+		width: min(55%, 450px);
+		height: 70%;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -55,16 +55,12 @@
 	& > .tokens {
 		grid-column: full;
 		position: relative;
-		/* display: grid; */
-		/* grid-template-columns: repeat(5, 1fr); */
-		/* row-gap: 4vw; */
-		grid-row: 1 / -1;
-		height: 55vw;
+		height: 70vw;
+		max-height: 450px;
 
 		& > .token {
 			position: absolute;
-			width: 24vw;
-			max-width: 170px;
+			height: 45%;
 			aspect-ratio: 1;
 			border-radius: var(--bdrs-round);
 
@@ -82,23 +78,18 @@
 			}
 
 			&:nth-of-type(1) {
-				/* grid-column: 1 / span 2; */
-				/* justify-self: flex-end; */
 				background-image: var(--bgi-paper);
-				left: 20%;
+				top: 0%;
+				right: 55%;
 			}
 
 			&:nth-of-type(2) {
-				/* grid-column: span 2 / -1; */
-				/* justify-self: flex-start; */
 				background-image: var(--bgi-scissors);
-				right: 20%;
+				top: 0%;
+				left: 55%;
 			}
 
 			&:nth-of-type(3) {
-				/* grid-column: 2 / span 3; */
-				/* grid-row: 2 / span 1; */
-				/* justify-self: center; */
 				background-image: var(--bgi-rock);
 				bottom: 0%;
 				left: 50%;
