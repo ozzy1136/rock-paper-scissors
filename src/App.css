@@ -14,8 +14,7 @@
 
 	& > .heading {
 		& > .logo {
-			width: 20vw;
-			max-width: 100px;
+			width: min(100px, 20vw);
 		}
 	}
 
@@ -44,7 +43,7 @@
 	margin-block: 14vh;
 
 	& > .background {
-		width: min(55%, 450px);
+		width: min(450px, 55%);
 		height: 70%;
 		position: absolute;
 		top: 50%;
@@ -53,10 +52,11 @@
 	}
 
 	& > .tokens {
+		--tokens-height: min(450px, 70vw);
+
 		grid-column: full;
 		position: relative;
-		height: 70vw;
-		max-height: 450px;
+		height: var(--tokens-height);
 
 		& > .token {
 			position: absolute;
@@ -65,12 +65,6 @@
 
 			&:focus-within {
 				outline: auto;
-			}
-
-			@media screen and (prefers-reduced-motion: no-preference) {
-				transition-property: top, left, transform;
-				transition-delay: 1ms;
-				transition-duration: 1s;
 			}
 
 			&::before,
@@ -97,9 +91,7 @@
 			}
 
 			&:nth-of-type(1) {
-				top: 0%;
-				left: 45%;
-				transform: translate(-100%, 0%);
+				transform: translate(calc(45vw - 100%), 0%);
 
 				&::before {
 					background-image: var(--bgi-paper);
@@ -107,9 +99,7 @@
 			}
 
 			&:nth-of-type(2) {
-				top: 0%;
-				left: 55%;
-				transform: translate(0%, 0%);
+				transform: translate(55vw, 0%);
 
 				&::before {
 					background-image: var(--bgi-scissors);
@@ -117,9 +107,10 @@
 			}
 
 			&:nth-of-type(3) {
-				top: 100%;
-				left: 50%;
-				transform: translate(-50%, -100%);
+				transform: translate(
+					calc(50vw - 50%),
+					calc(var(--tokens-height) - 100%)
+				);
 
 				&::before {
 					background-image: var(--bgi-rock);
@@ -151,9 +142,9 @@
 	margin-block-end: 10vh;
 
 	& > .button {
+		background: unset;
 		grid-column: wrapper;
 		justify-self: center;
-		background: unset;
 		border-style: solid;
 		border-width: 2px;
 		border-color: hsl(var(--bdc-header));
@@ -188,16 +179,16 @@
 
 	& > .tokens {
 		& > .token {
-			&.user {
-				&:nth-of-type(2) {
-					left: 45%;
-					transform: translate(-100%, 0%);
-				}
+			@media screen and (prefers-reduced-motion: no-preference) {
+				transition-property: transform;
+				transition-delay: 1ms;
+				transition-duration: 1s;
+			}
 
+			&.user {
+				&:nth-of-type(2),
 				&:nth-of-type(3) {
-					top: 0%;
-					left: 45%;
-					transform: translate(-100%, 0%);
+					transform: translate(calc(45vw - 100%), 0%);
 				}
 			}
 
@@ -218,15 +209,9 @@
 					}
 				}
 
-				&:nth-of-type(1) {
-					left: 55%;
-					transform: unset;
-				}
-
+				&:nth-of-type(1),
 				&:nth-of-type(3) {
-					top: 0%;
-					left: 55%;
-					transform: unset;
+					transform: translate(55vw, 0%);
 				}
 			}
 
