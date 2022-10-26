@@ -58,14 +58,14 @@
 		height: 70vw;
 		max-height: 450px;
 
-		& > .button {
-			clip: rect(0, 0, 0, 0);
-		}
-
 		& > .token {
 			position: absolute;
 			height: 45%;
 			aspect-ratio: 1;
+
+			&:focus-within {
+				outline: auto;
+			}
 
 			@media screen and (prefers-reduced-motion: no-preference) {
 				transition-property: top, left, transform;
@@ -138,6 +138,10 @@
 					transition-delay: 0.5s;
 					transition-duration: 0.3s;
 				}
+			}
+
+			& > .button {
+				clip: rect(0, 0, 0, 0);
 			}
 		}
 	}

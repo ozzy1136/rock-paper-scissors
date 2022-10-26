@@ -30,15 +30,36 @@ export default function App() {
 				<div className="l-match page-section-container">
 					<Triangle className="background" />
 					<div className="tokens">
-						<div className="token paper">
+						<label className="token">
 							<IconPaper className="icon" />
-						</div>
-						<div className="token scissors">
+							<button
+								className="button sr-only"
+								type="button"
+								id="token-paper"
+							>
+								Paper
+							</button>
+						</label>
+						<label className="token">
 							<IconScissors className="icon" />
-						</div>
-						<div className="token rock">
+							<button
+								className="button sr-only"
+								type="button"
+								id="token-scissors"
+							>
+								Scissors
+							</button>
+						</label>
+						<label className="token">
 							<IconRock className="icon" />
-						</div>
+							<button
+								className="button sr-only"
+								type="button"
+								id="token-rock"
+							>
+								Rock
+							</button>
+						</label>
 					</div>
 				</div>
 
