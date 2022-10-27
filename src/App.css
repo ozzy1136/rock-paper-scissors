@@ -1,3 +1,5 @@
+@import "keyframes.css";
+
 .l-page {
 	padding-block: 8vh;
 }
@@ -39,6 +41,8 @@
 }
 
 .l-match {
+	--tokens-height: min(450px, 70vw);
+
 	position: relative;
 	margin-block: 14vh;
 
@@ -52,8 +56,6 @@
 	}
 
 	& > .tokens {
-		--tokens-height: min(450px, 70vw);
-
 		grid-column: full;
 		position: relative;
 		height: var(--tokens-height);
@@ -123,17 +125,37 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-
-				@media screen and (prefers-reduced-motion: no-preference) {
-					transition-property: opacity;
-					transition-delay: 0.5s;
-					transition-duration: 0.3s;
-				}
 			}
 
 			& > .button {
 				clip: rect(0, 0, 0, 0);
 			}
+		}
+	}
+
+	& > .label {
+		opacity: 0;
+		width: calc(var(--tokens-height) * 0.45);
+		color: #fff;
+		font-family: var(--ff-bold);
+		font-size: 1.5rem;
+		text-transform: uppercase;
+		text-align: center;
+		letter-spacing: 1px;
+		position: absolute;
+
+		&.user {
+			transform: translate(
+				calc(45vw - 100%),
+				calc(var(--tokens-height) * 0.45 + 2rem)
+			);
+		}
+
+		&.house {
+			transform: translate(
+				calc(55vw),
+				calc(var(--tokens-height) * 0.45 + 2rem)
+			);
 		}
 	}
 }
@@ -179,44 +201,80 @@
 
 	& > .tokens {
 		& > .token {
-			@media screen and (prefers-reduced-motion: no-preference) {
-				transition-property: transform;
-				transition-delay: 1ms;
-				transition-duration: 1s;
-			}
-
 			&.user {
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
-					transform: translate(calc(45vw - 100%), 0%);
+					@media (--prm-no-preference) {
+						animation-name: move-user-token;
+						animation-fill-mode: forwards;
+						animation-duration: 1s;
+					}
 				}
 			}
 
-			&.cpu {
-				&.cpu-undecided {
-					&::before {
-						opacity: 0;
-					}
+			&.house {
+				&,
+				&::before,
+				&::after {
+					animation-fill-mode: forwards;
+				}
 
-					&::after {
-						box-shadow: unset;
-						background-color: hsl(var(--bgc-loadingToken));
-					}
+				&::before {
+					animation-name: reveal-house-token-border;
 
-					& > .icon {
-						opacity: 0;
-						transition-property: none;
+					@media (--prm-no-preference) {
+						animation-duration: 4s;
+					}
+				}
+
+				&::after {
+					animation-name: update-house-token-background;
+
+					@media (--prm-no-preference) {
+						animation-duration: 4s;
 					}
 				}
 
 				&:nth-of-type(1),
 				&:nth-of-type(3) {
-					transform: translate(55vw, 0%);
+					animation-name: move-house-token;
+
+					@media (--prm-no-preference) {
+						animation-duration: 1s;
+					}
+				}
+
+				& > .icon {
+					animation-name: reveal-house-token-icon;
+
+					@media (--prm-no-preference) {
+						animation-duration: 5s;
+					}
 				}
 			}
 
 			&.hidden {
 				display: none;
+			}
+		}
+	}
+
+	& > .label {
+		animation-fill-mode: forwards;
+
+		&.user {
+			animation-name: reveal-user-token-label;
+
+			@media (--prm-no-preference) {
+				animation-duration: 2s;
+			}
+		}
+
+		&.house {
+			animation-name: reveal-house-token-label;
+
+			@media (--prm-no-preference) {
+				animation-duration: 4s;
 			}
 		}
 	}

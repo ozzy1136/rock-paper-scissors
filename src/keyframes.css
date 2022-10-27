@@ -1,0 +1,84 @@
+@keyframes move-user-token {
+	100% {
+		transform: translate(calc(45vw - 100%), 0%);
+	}
+}
+
+@keyframes reveal-user-token-label {
+	0% {
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes move-house-token {
+	100% {
+		transform: translate(55vw, 0%);
+	}
+}
+
+@keyframes reveal-house-token-label {
+	0% {
+		opacity: 0;
+	}
+
+	60% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes reveal-house-token-border {
+	0% {
+		opacity: 0;
+	}
+
+	90% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes reveal-house-token-icon {
+	0% {
+		opacity: 0;
+	}
+
+	90% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 100%;
+	}
+}
+
+@keyframes update-house-token-background {
+	0% {
+		box-shadow: unset;
+		background-color: hsl(var(--bgc-loadingToken));
+	}
+
+	60% {
+		box-shadow: unset;
+		background-color: hsl(var(--bgc-loadingToken));
+	}
+
+	100% {
+		box-shadow: inset 0px 2px 2px #808080;
+		background-color: #fff;
+	}
+}

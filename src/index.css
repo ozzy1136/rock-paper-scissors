@@ -8,6 +8,8 @@
 	src: url("/fonts/BarlowSemiCondensed-Bold.ttf");
 }
 
+@custom-media --prm-no-preference screen and (prefers-reduced-motion: no-preference);
+
 :root {
 	--ff-semibold: "Barlow Semi Condensed Semi Bold", sans-serif;
 	--ff-bold: "Barlow Semi Condensed Bold", sans-serif;
