@@ -189,20 +189,6 @@ body {
 }
 
 /*
- * Change the display on visually hidden accessible elements
- * in all browsers (opinionated).
- */
-
-:where([aria-hidden="false" i][hidden]) {
-	display: initial;
-	position: absolute;
-}
-
-:where([aria-hidden="false" i][hidden]:not(:focus)) {
-	clip: rect(0, 0, 0, 0);
-}
-
-/*
 *
 * Utility Classes
 *
@@ -210,11 +196,22 @@ body {
 
 /* Fallback for when unable to directly set aria-hidden */
 :where(.sr-only) {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+}
+
+:where(.sr-only-with-focus) {
 	display: initial;
 	position: absolute;
 }
 
-:where(.sr-only:not(:focus)) {
+:where(.sr-only-with-focus:not(:focus)) {
 	clip: rect(0, 0, 0, 0);
 }
 
