@@ -158,6 +158,18 @@
 			);
 		}
 	}
+
+	& > .result {
+		grid-column: wrapper;
+		color: #fff;
+		text-align: center;
+		margin-inline: auto;
+	}
+
+	& > .resetBtn {
+		grid-column: wrapper;
+		justify-self: center;
+	}
 }
 
 .l-rules {
@@ -204,18 +216,28 @@
 			&.user {
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
+					animation-fill-mode: forwards;
+
 					@media (--prm-no-preference) {
-						animation-name: move-user-token;
-						animation-fill-mode: forwards;
 						animation-duration: 1s;
 					}
+				}
+
+				&:nth-of-type(2) {
+					animation-name: move-user-token-2;
+				}
+
+				&:nth-of-type(3) {
+					animation-name: move-user-token-3;
 				}
 			}
 
 			&.house {
-				&,
 				&::before,
-				&::after {
+				&::after,
+				&:nth-of-type(1),
+				&:nth-of-type(3),
+				& > .icon {
 					animation-fill-mode: forwards;
 				}
 
@@ -228,27 +250,33 @@
 				}
 
 				&::after {
-					animation-name: update-house-token-background;
+					animation-name: tween-house-token-background;
 
 					@media (--prm-no-preference) {
-						animation-duration: 4s;
+						animation-duration: 3.5s;
 					}
 				}
 
 				&:nth-of-type(1),
 				&:nth-of-type(3) {
-					animation-name: move-house-token;
-
 					@media (--prm-no-preference) {
 						animation-duration: 1s;
 					}
+				}
+
+				&:nth-of-type(1) {
+					animation-name: move-house-token-1;
+				}
+
+				&:nth-of-type(3) {
+					animation-name: move-house-token-3;
 				}
 
 				& > .icon {
 					animation-name: reveal-house-token-icon;
 
 					@media (--prm-no-preference) {
-						animation-duration: 5s;
+						animation-duration: 4.5s;
 					}
 				}
 			}
@@ -260,7 +288,10 @@
 	}
 
 	& > .label {
-		animation-fill-mode: forwards;
+		&.user,
+		&.house {
+			animation-fill-mode: forwards;
+		}
 
 		&.user {
 			animation-name: reveal-user-token-label;
@@ -274,7 +305,66 @@
 			animation-name: reveal-house-token-label;
 
 			@media (--prm-no-preference) {
-				animation-duration: 4s;
+				animation-duration: 3.5s;
+			}
+		}
+	}
+}
+
+/* TODO figure out why reverse animation doesn't work */
+.l-match.is-resetting {
+	& > .background {
+		display: none;
+	}
+
+	& > .tokens {
+		& > .token {
+			&.user {
+				&:nth-of-type(2),
+				&:nth-of-type(3) {
+					/* animation-direction: reverse; */
+					/* animation-fill-mode: forwards; */
+
+					@media (--prm-no-preference) {
+						animation-duration: 2s;
+					}
+				}
+
+				&:nth-of-type(2) {
+					animation-name: move-user-token-2;
+					animation-direction: reverse;
+				}
+
+				&:nth-of-type(3) {
+					animation-name: move-user-token-3;
+					animation-direction: reverse;
+				}
+			}
+
+			&.house {
+				&:nth-of-type(1),
+				&:nth-of-type(3) {
+					/* animation-direction: reverse; */
+					/* animation-fill-mode: forwards; */
+
+					@media (--prm-no-preference) {
+						animation-duration: 2s;
+					}
+				}
+
+				&:nth-of-type(1) {
+					animation-name: move-house-token-1;
+					animation-direction: reverse;
+				}
+
+				&:nth-of-type(3) {
+					animation-name: move-house-token-3;
+					animation-direction: reverse;
+				}
+			}
+
+			&.hidden {
+				display: revert;
 			}
 		}
 	}

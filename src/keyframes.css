@@ -1,4 +1,21 @@
-@keyframes move-user-token {
+@keyframes move-user-token-2 {
+	0% {
+		transform: translate(55vw, 0%);
+	}
+
+	100% {
+		transform: translate(calc(45vw - 100%), 0%);
+	}
+}
+
+@keyframes move-user-token-3 {
+	0% {
+		transform: translate(
+			calc(50vw - 50%),
+			calc(var(--tokens-height) - 100%)
+		);
+	}
+
 	100% {
 		transform: translate(calc(45vw - 100%), 0%);
 	}
@@ -18,7 +35,24 @@
 	}
 }
 
-@keyframes move-house-token {
+@keyframes move-house-token-1 {
+	0% {
+		transform: translate(calc(45vw - 100%), 0%);
+	}
+
+	100% {
+		transform: translate(55vw, 0%);
+	}
+}
+
+@keyframes move-house-token-3 {
+	0% {
+		transform: translate(
+			calc(50vw - 50%),
+			calc(var(--tokens-height) - 100%)
+		);
+	}
+
 	100% {
 		transform: translate(55vw, 0%);
 	}
@@ -29,7 +63,7 @@
 		opacity: 0;
 	}
 
-	60% {
+	70% {
 		opacity: 0;
 	}
 
@@ -66,13 +100,13 @@
 	}
 }
 
-@keyframes update-house-token-background {
+@keyframes tween-house-token-background {
 	0% {
 		box-shadow: unset;
 		background-color: hsl(var(--bgc-loadingToken));
 	}
 
-	60% {
+	70% {
 		box-shadow: unset;
 		background-color: hsl(var(--bgc-loadingToken));
 	}
