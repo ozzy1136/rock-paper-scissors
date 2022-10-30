@@ -69,27 +69,16 @@
 				outline: auto;
 			}
 
-			&::before,
-			&::after {
+			&::before {
 				content: "";
+				width: 100%;
+				height: 100%;
 				border-radius: var(--bdrs-round);
 				position: absolute;
 				z-index: -1;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-			}
-
-			&::before {
-				width: 100%;
-				height: 100%;
-			}
-
-			&::after {
-				width: 75%;
-				height: 75%;
-				background-color: #fff;
-				box-shadow: inset 0px 2px 2px #808080;
 			}
 
 			&:nth-of-type(1) {
@@ -125,10 +114,6 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-			}
-
-			& > .button {
-				clip: rect(0, 0, 0, 0);
 			}
 		}
 	}
@@ -224,11 +209,11 @@
 				}
 
 				&:nth-of-type(2) {
-					animation-name: move-user-token-2;
+					animation-name: move-user-token-forward-2;
 				}
 
 				&:nth-of-type(3) {
-					animation-name: move-user-token-3;
+					animation-name: move-user-token-forward-3;
 				}
 			}
 
@@ -242,14 +227,6 @@
 				}
 
 				&::before {
-					animation-name: reveal-house-token-border;
-
-					@media (--prm-no-preference) {
-						animation-duration: 4s;
-					}
-				}
-
-				&::after {
 					animation-name: tween-house-token-background;
 
 					@media (--prm-no-preference) {
@@ -265,11 +242,19 @@
 				}
 
 				&:nth-of-type(1) {
-					animation-name: move-house-token-1;
+					--house-token-background: var(--bgi-paper);
+
+					animation-name: move-house-token-forward-1;
+				}
+
+				&:nth-of-type(2) {
+					--house-token-background: var(--bgi-scissors);
 				}
 
 				&:nth-of-type(3) {
-					animation-name: move-house-token-3;
+					--house-token-background: var(--bgi-rock);
+
+					animation-name: move-house-token-forward-3;
 				}
 
 				& > .icon {
@@ -322,44 +307,34 @@
 			&.user {
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
-					/* animation-direction: reverse; */
-					/* animation-fill-mode: forwards; */
-
 					@media (--prm-no-preference) {
-						animation-duration: 2s;
+						animation-duration: 1s;
 					}
 				}
 
 				&:nth-of-type(2) {
-					animation-name: move-user-token-2;
-					animation-direction: reverse;
+					animation-name: move-user-token-reverse-2;
 				}
 
 				&:nth-of-type(3) {
-					animation-name: move-user-token-3;
-					animation-direction: reverse;
+					animation-name: move-user-token-reverse-3;
 				}
 			}
 
 			&.house {
 				&:nth-of-type(1),
 				&:nth-of-type(3) {
-					/* animation-direction: reverse; */
-					/* animation-fill-mode: forwards; */
-
 					@media (--prm-no-preference) {
-						animation-duration: 2s;
+						animation-duration: 1s;
 					}
 				}
 
 				&:nth-of-type(1) {
-					animation-name: move-house-token-1;
-					animation-direction: reverse;
+					animation-name: move-house-token-reverse-1;
 				}
 
 				&:nth-of-type(3) {
-					animation-name: move-house-token-3;
-					animation-direction: reverse;
+					animation-name: move-house-token-reverse-3;
 				}
 			}
 
