@@ -5,7 +5,7 @@
 		"moduleResolution": "Node16",
 		"baseUrl": ".",
 		"paths": {
-			"@components/*": ["src/components/*"],
+			"@components/*": ["src/components/*/index.jsx"],
 			"@assets/*": ["src/assets/*"]
 		},
 		"strictNullChecks": true,
