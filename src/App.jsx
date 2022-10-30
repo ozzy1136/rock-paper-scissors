@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 
 import "./App.css";
 import { ReactComponent as Logo } from "./assets/images/logo.svg";
@@ -8,6 +8,7 @@ import { ReactComponent as IconScissors } from "./assets/images/icon-scissors.sv
 import { ReactComponent as IconRock } from "./assets/images/icon-rock.svg";
 import { ReactComponent as IconClose } from "./assets/images/icon-close.svg";
 import { ReactComponent as ImgRules } from "./assets/images/image-rules.svg";
+import Token from "./components/Token";
 
 const matchInit = {
 	isDueling: false,
@@ -26,7 +27,6 @@ function matchReducer(state, action) {
 				houseToken: action.houseToken,
 			};
 		}
-
 		case "reset_match": {
 			return {
 				...state,
@@ -34,27 +34,76 @@ function matchReducer(state, action) {
 				isResetting: true,
 			};
 		}
-
-		case "init": {
+		case "init_match": {
 			return {
 				...state,
 				...matchInit,
 			};
 		}
-
 		default:
 			throw new Error("Unknown action: " + action.type);
 	}
 }
 
 export default function App() {
+	const rockToken = useRef(null);
+	const paperToken = useRef(null);
+	const scissorsToken = useRef(null);
 	const [matchState, updateMatchState] = useReducer(matchReducer, matchInit);
 
-	function handleTokenClick(_) {
+	useEffect(() => {
+		if (matchState.userToken) {
+			rockToken.current.addEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+			paperToken.current.addEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+			scissorsToken.current.addEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+		}
+
+		// TODO event won't fire if paper is user and scissors is house since these states don't have animations
+		function handleAnimationEnd(e) {
+			if (
+				e.animationName === "move-user-token-reverse-2" ||
+				e.animationName === "move-user-token-reverse-3" ||
+				e.animationName === "move-house-token-reverse-1" ||
+				e.animationName === "move-house-token-reverse-3"
+			) {
+				updateMatchState({
+					type: "init_match",
+				});
+			}
+		}
+
+		return () => {
+			rockToken.current.removeEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+			paperToken.current.removeEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+			scissorsToken.current.removeEventListener(
+				"animationend",
+				handleAnimationEnd
+			);
+		};
+	}, [matchState.userToken]);
+
+	function handleTokenClick(e) {
 		updateMatchState({
 			type: "start_match",
-			userToken: "rock",
-			houseToken: "paper",
+			userToken: e.target.dataset.tokentype,
+			houseToken: ["rock", "paper", "scissors"].filter(
+				(curr) => curr !== e.target.dataset.tokentype
+			)[Math.round(Math.random())],
 		});
 	}
 
@@ -62,11 +111,6 @@ export default function App() {
 		updateMatchState({
 			type: "reset_match",
 		});
-		setTimeout(() => {
-			updateMatchState({
-				type: "init",
-			});
-		}, 2000);
 	}
 
 	return (
@@ -89,73 +133,81 @@ export default function App() {
 				</div>
 
 				<div
-					className={[
-						"l-match",
-						"page-section-container",
-						matchState.isDueling && "is-dueling",
-						matchState.isResetting && "is-resetting",
-					]
-						.filter((curr) => curr)
-						.join(" ")}
+					className={`l-match page-section-container ${
+						matchState.isDueling
+							? "is-dueling"
+							: matchState.isResetting
+							? "is-resetting"
+							: ""
+					}`}
 				>
 					<Triangle className="background" />
 					<div className="tokens">
-						<label className="token house">
-							<IconPaper className="icon" />
-							<button
-								className="button sr-only"
-								type="button"
-								id="token-paper"
-								disabled={
-									matchState.isDueling ||
-									matchState.isResetting
-								}
-								onClick={handleTokenClick}
-								data-tokentype="paper"
-							>
-								Paper
-							</button>
-						</label>
-						<label className="token hidden">
-							<IconScissors className="icon" />
-							<button
-								className="button sr-only"
-								type="button"
-								id="token-scissors"
-								disabled={
-									matchState.isDueling ||
-									matchState.isResetting
-								}
-								onClick={handleTokenClick}
-								data-tokentype="scissors"
-							>
-								Scissors
-							</button>
-						</label>
-						<label className="token user">
-							<IconRock className="icon" />
-							<button
-								className="button sr-only"
-								type="button"
-								id="token-rock"
-								disabled={
-									matchState.isDueling ||
-									matchState.isResetting
-								}
-								onClick={handleTokenClick}
-								data-tokentype="rock"
-							>
-								Rock
-							</button>
-						</label>
+						<Token
+							tokenName="paper"
+							tokenClass={
+								matchState.userToken === "paper"
+									? "user"
+									: matchState.houseToken === "paper"
+									? "house"
+									: matchState.isDueling ||
+									  matchState.isResetting
+									? "hidden"
+									: ""
+							}
+							isDisabled={
+								matchState.isDueling || matchState.isResetting
+							}
+							tokenRef={paperToken}
+							handleTokenClick={handleTokenClick}
+							TokenIcon={IconPaper}
+						/>
+						<Token
+							tokenName="scissors"
+							tokenClass={
+								matchState.userToken === "scissors"
+									? "user"
+									: matchState.houseToken === "scissors"
+									? "house"
+									: matchState.isDueling ||
+									  matchState.isResetting
+									? "hidden"
+									: ""
+							}
+							isDisabled={
+								matchState.isDueling || matchState.isResetting
+							}
+							tokenRef={scissorsToken}
+							handleTokenClick={handleTokenClick}
+							TokenIcon={IconScissors}
+						/>
+						<Token
+							tokenName="rock"
+							tokenClass={
+								matchState.userToken === "rock"
+									? "user"
+									: matchState.houseToken === "rock"
+									? "house"
+									: matchState.isDueling ||
+									  matchState.isResetting
+									? "hidden"
+									: ""
+							}
+							isDisabled={
+								matchState.isDueling || matchState.isResetting
+							}
+							tokenRef={rockToken}
+							handleTokenClick={handleTokenClick}
+							TokenIcon={IconRock}
+						/>
 					</div>
 					<p className="label user" aria-live="polite">
 						{matchState.isDueling && (
 							<span>
 								You picked
-								<span className="sr-only">
+								{/* <span className="sr-only">
 									{matchState.userToken}
-								</span>
+								</span> */}
 							</span>
 						)}
 					</p>
@@ -163,13 +215,13 @@ export default function App() {
 						{matchState.isDueling && (
 							<span>
 								The house picked
-								<span className="sr-only">
+								{/* <span className="sr-only">
 									{matchState.houseToken}
-								</span>
+								</span> */}
 							</span>
 						)}
 					</p>
-					{/* {matchState.isDueling && (
+					{matchState.isDueling && (
 						<>
 							<p className="result" aria-live="polite">
 								You win
@@ -182,7 +234,7 @@ export default function App() {
 								Play again
 							</button>
 						</>
-					)} */}
+					)}
 				</div>
 
 				<div className="l-rules page-section-container">
