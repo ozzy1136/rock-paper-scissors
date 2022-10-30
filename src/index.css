@@ -27,9 +27,27 @@
 		hsla(214, 47%, 23%, 0.97),
 		hsl(237, 49%, 15%, 0.97)
 	);
-	--bgi-scissors: radial-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
-	--bgi-paper: radial-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
-	--bgi-rock: radial-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+	--bgi-scissors: radial-gradient(
+		circle,
+		#fff 0% 55%,
+		55%,
+		hsl(39, 89%, 49%) 55%,
+		hsl(40, 84%, 53%) 100%
+	);
+	--bgi-paper: radial-gradient(
+		circle,
+		#fff 0% 55%,
+		55%,
+		hsl(230, 89%, 62%) 55%,
+		hsl(230, 89%, 65%) 100%
+	);
+	--bgi-rock: radial-gradient(
+		circle,
+		#fff 0% 55%,
+		55%,
+		hsl(349, 71%, 52%) 55%,
+		hsl(349, 70%, 56%) 100%
+	);
 
 	--page-gap-size: 8vw;
 }
