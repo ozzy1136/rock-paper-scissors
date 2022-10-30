@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
@@ -6,4 +7,10 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
 	plugins: [svgr(), react()],
 	base: "/rock-paper-scissors/",
+	resolve: {
+		alias: {
+			assets: path.resolve(__dirname, "src/assets"),
+			components: path.resolve(__dirname, "src/components"),
+		},
+	},
 });
