@@ -305,11 +305,16 @@
 	& > .tokens {
 		& > .token {
 			&.user {
+				&:nth-of-type(1),
 				&:nth-of-type(2),
 				&:nth-of-type(3) {
 					@media (--prm-no-preference) {
 						animation-duration: 1s;
 					}
+				}
+
+				&:nth-of-type(1) {
+					animation-name: move-user-token-reverse-1;
 				}
 
 				&:nth-of-type(2) {
@@ -323,6 +328,7 @@
 
 			&.house {
 				&:nth-of-type(1),
+				&:nth-of-type(2),
 				&:nth-of-type(3) {
 					@media (--prm-no-preference) {
 						animation-duration: 1s;
@@ -331,6 +337,10 @@
 
 				&:nth-of-type(1) {
 					animation-name: move-house-token-reverse-1;
+				}
+
+				&:nth-of-type(2) {
+					animation-name: move-house-token-reverse-2;
 				}
 
 				&:nth-of-type(3) {

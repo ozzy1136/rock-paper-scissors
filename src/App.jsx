@@ -69,12 +69,7 @@ export default function App() {
 
 		// TODO event won't fire if paper is user and scissors is house since these states don't have animations
 		function handleAnimationEnd(e) {
-			if (
-				e.animationName === "move-user-token-reverse-2" ||
-				e.animationName === "move-user-token-reverse-3" ||
-				e.animationName === "move-house-token-reverse-1" ||
-				e.animationName === "move-house-token-reverse-3"
-			) {
+			if (e.animationName.includes("reverse")) {
 				updateMatchState({
 					type: "init_match",
 				});

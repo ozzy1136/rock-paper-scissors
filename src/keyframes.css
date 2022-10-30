@@ -1,3 +1,14 @@
+/* Keyframe used to trigger animationend event */
+@keyframes move-user-token-reverse-1 {
+	0% {
+		transform: translate(calc(45vw - 100%), 0%);
+	}
+
+	100% {
+		transform: translate(calc(45vw - 100%), 0%);
+	}
+}
+
 @keyframes move-user-token-forward-2 {
 	0% {
 		transform: translate(55vw, 0%);
@@ -61,6 +72,17 @@
 
 	100% {
 		transform: translate(calc(45vw - 100%), 0%);
+	}
+}
+
+/* Keyframe used to trigger animationend event */
+@keyframes move-house-token-reverse-2 {
+	0% {
+		transform: translate(55vw, 0%);
+	}
+
+	100% {
+		transform: translate(55vw, 0%);
 	}
 }
 
