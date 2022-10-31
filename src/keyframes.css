@@ -82,7 +82,7 @@
 }
 
 @keyframes reveal-house-token-icon {
-	0% {
+	25% {
 		opacity: 0;
 	}
 
@@ -98,8 +98,6 @@
 @keyframes tween-house-token-background {
 	0% {
 		transform: translate(-50%, -50%) scale(0.75);
-		background-image: none;
-		background-color: hsl(var(--bgc-loadingToken));
 	}
 
 	70% {
