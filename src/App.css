@@ -23,19 +23,22 @@
 	& > .score {
 		background-color: #fff;
 		border-radius: var(--bdrs-soft);
-		flex-direction: column;
 		width: clamp(4rem, 20vw, 5.5rem);
 		height: clamp(4.2rem, 20vw, 5.5rem);
 
-		& > .title {
-			color: hsl(var(--c-score));
-			font-family: var(--ff-semibold);
-		}
+		& > .text {
+			text-align: center;
 
-		& > .value {
-			color: hsl(var(--c-dark));
-			font-family: var(--ff-bold);
-			font-size: 2rem;
+			& > .title {
+				color: hsl(var(--c-score));
+				font-family: var(--ff-semibold);
+			}
+
+			& > .value {
+				color: hsl(var(--c-dark));
+				font-family: var(--ff-bold);
+				font-size: 2rem;
+			}
 		}
 	}
 }

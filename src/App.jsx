@@ -19,13 +19,16 @@ export default function App() {
 						<h1 className="sr-only">Rock, paper, scissors</h1>
 						<Logo className="logo" />
 					</div>
-					<div
-						className="score center-children"
-						aria-live="polite"
-						aria-atomic="true"
-					>
-						<p className="title">Score</p>
-						<p className="value">{score}</p>
+					<div className="score center-children">
+						<p
+							className="text"
+							aria-live="polite"
+							aria-atomic="true"
+						>
+							<span className="title">Score</span>
+							<br />
+							<span className="value">{score}</span>
+						</p>
 					</div>
 				</div>
 				<TokensContainer setScore={setScore} />
