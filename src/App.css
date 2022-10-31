@@ -41,7 +41,8 @@
 }
 
 .l-match {
-	--tokens-height: min(450px, 70vw);
+	--tokens-container-height: min(450px, 70vw);
+	--token-wrapper-height: 45%;
 
 	position: relative;
 	margin-block: 14vh;
@@ -55,130 +56,139 @@
 		transform: translate(-50%, -50%);
 	}
 
-	& > .tokens {
+	& > .tokens-container {
 		grid-column: full;
+		height: var(--tokens-container-height);
 		position: relative;
-		height: var(--tokens-height);
 
-		& > .token {
+		& > .token-wrapper {
 			position: absolute;
-			height: 45%;
+			height: var(--token-wrapper-height);
 			aspect-ratio: 1;
+			overflow: hidden;
 
 			&:focus-within {
 				outline: auto;
 			}
 
-			&::before {
-				content: "";
-				width: 100%;
-				height: 100%;
-				border-radius: var(--bdrs-round);
-				position: absolute;
-				z-index: -1;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
-
 			&:nth-of-type(1) {
 				transform: translate(calc(45vw - 100%), 0%);
 
-				&::before {
-					background-image: var(--bgi-paper);
+				& > .token {
+					&::before {
+						background-image: var(--bgi-paper);
+					}
 				}
 			}
 
 			&:nth-of-type(2) {
 				transform: translate(55vw, 0%);
 
-				&::before {
-					background-image: var(--bgi-scissors);
+				& > .token {
+					&::before {
+						background-image: var(--bgi-scissors);
+					}
 				}
 			}
 
 			&:nth-of-type(3) {
 				transform: translate(
 					calc(50vw - 50%),
-					calc(var(--tokens-height) - 100%)
+					calc(var(--tokens-container-height) - 100%)
 				);
 
-				&::before {
-					background-image: var(--bgi-rock);
+				& > .token {
+					&::before {
+						background-image: var(--bgi-rock);
+					}
 				}
 			}
 
-			& > .icon {
-				height: 40%;
+			& > .token {
 				position: absolute;
+				height: 100%;
+				width: 100%;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
+
+				&::before {
+					content: "";
+					width: 100%;
+					height: 100%;
+					border-radius: var(--bdrs-round);
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+
+				& > .icon {
+					height: 40%;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
 			}
 		}
 	}
 
 	& > .label {
+		width: calc(var(--tokens-container-height) * 0.45);
 		opacity: 0;
-		width: calc(var(--tokens-height) * 0.45);
 		color: #fff;
 		font-family: var(--ff-bold);
 		font-size: 1.5rem;
 		text-transform: uppercase;
-		text-align: center;
 		letter-spacing: 1px;
+		text-align: center;
 		position: absolute;
 
 		&.user {
 			transform: translate(
 				calc(45vw - 100%),
-				calc(var(--tokens-height) * 0.45 + 2rem)
+				calc(var(--tokens-container-height) * 0.45 + 2rem)
 			);
 		}
 
 		&.house {
 			transform: translate(
 				calc(55vw),
-				calc(var(--tokens-height) * 0.45 + 2rem)
+				calc(var(--tokens-container-height) * 0.45 + 2rem)
 			);
 		}
 	}
 
-	& > .result {
+	& > .resetButton-wrapper {
 		grid-column: wrapper;
-		color: #fff;
-		text-align: center;
-		margin-inline: auto;
-	}
-
-	& > .resetBtn {
-		grid-column: wrapper;
-		justify-self: center;
 	}
 }
 
 .l-rules {
 	margin-block-end: 10vh;
 
-	& > .button {
-		background: unset;
+	& > .button-wrapper {
 		grid-column: wrapper;
-		justify-self: center;
-		border-style: solid;
-		border-width: 2px;
-		border-color: hsl(var(--bdc-header));
-		border-radius: var(--bdrs-soft);
-		color: #fff;
-		font-family: sans-serif;
-		font-weight: lighter;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		padding-block: 0.5rem;
-		padding-inline: 1.7rem;
+
+		& > .button {
+			background: unset;
+			border-style: solid;
+			border-width: 2px;
+			border-color: hsl(var(--bdc-header));
+			border-radius: var(--bdrs-soft);
+			color: #fff;
+			font-family: sans-serif;
+			font-weight: lighter;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			padding-block: 0.5rem;
+			padding-inline: 1.7rem;
+		}
 	}
 }
 
-.l-page-footer {
+.l-footer {
 	& > .attribution {
 		grid-column: wrapper;
 		text-align: center;
@@ -196,55 +206,26 @@
 		display: none;
 	}
 
-	& > .tokens {
-		& > .token {
-			&.user {
-				&:nth-of-type(2),
-				&:nth-of-type(3) {
-					animation-fill-mode: forwards;
+	& > .tokens-container {
+		& > .token-wrapper {
+			&.user,
+			&.house {
+				animation-fill-mode: forwards;
 
-					@media (--prm-no-preference) {
-						animation-duration: 1s;
-					}
-				}
-
-				&:nth-of-type(2) {
-					animation-name: move-user-token-forward-2;
-				}
-
-				&:nth-of-type(3) {
-					animation-name: move-user-token-forward-3;
+				@media (--prm-no-preference) {
+					animation-duration: 1s;
 				}
 			}
 
+			&.user {
+				animation-name: move-user-token;
+			}
+
 			&.house {
-				&::before,
-				&::after,
-				&:nth-of-type(1),
-				&:nth-of-type(3),
-				& > .icon {
-					animation-fill-mode: forwards;
-				}
-
-				&::before {
-					animation-name: tween-house-token-background;
-
-					@media (--prm-no-preference) {
-						animation-duration: 3.5s;
-					}
-				}
-
-				&:nth-of-type(1),
-				&:nth-of-type(3) {
-					@media (--prm-no-preference) {
-						animation-duration: 1s;
-					}
-				}
+				animation-name: move-house-token;
 
 				&:nth-of-type(1) {
 					--house-token-background: var(--bgi-paper);
-
-					animation-name: move-house-token-forward-1;
 				}
 
 				&:nth-of-type(2) {
@@ -253,15 +234,28 @@
 
 				&:nth-of-type(3) {
 					--house-token-background: var(--bgi-rock);
-
-					animation-name: move-house-token-forward-3;
 				}
 
-				& > .icon {
-					animation-name: reveal-house-token-icon;
+				& > .token {
+					&::before,
+					& > .icon {
+						animation-fill-mode: forwards;
+					}
 
-					@media (--prm-no-preference) {
-						animation-duration: 4.5s;
+					&::before {
+						animation-name: tween-house-token-background;
+
+						@media (--prm-no-preference) {
+							animation-duration: 3.5s;
+						}
+					}
+
+					& > .icon {
+						animation-name: reveal-house-token-icon;
+
+						@media (--prm-no-preference) {
+							animation-duration: 4.5s;
+						}
 					}
 				}
 			}
@@ -296,55 +290,48 @@
 	}
 }
 
-/* TODO figure out why reverse animation doesn't work */
 .l-match.is-resetting {
 	& > .background {
 		display: none;
 	}
 
-	& > .tokens {
-		& > .token {
+	& > .tokens-container {
+		& > .token-wrapper {
+			animation-fill-mode: forwards;
+
+			@media (--prm-no-preference) {
+				animation-duration: 1s;
+			}
+
+			&:nth-of-type(1) {
+				animation-name: reset-move-token-1;
+			}
+
+			&:nth-of-type(2) {
+				animation-name: reset-move-token-2;
+			}
+
+			&:nth-of-type(3) {
+				animation-name: reset-move-token-3;
+			}
+
 			&.user {
-				&:nth-of-type(1),
-				&:nth-of-type(2),
-				&:nth-of-type(3) {
-					@media (--prm-no-preference) {
-						animation-duration: 1s;
+				transform: translate(calc(45vw - 100%), 0%);
+
+				@media (--prm-no-preference) {
+					&:nth-of-type(1) {
+						animation-duration: revert;
 					}
-				}
-
-				&:nth-of-type(1) {
-					animation-name: move-user-token-reverse-1;
-				}
-
-				&:nth-of-type(2) {
-					animation-name: move-user-token-reverse-2;
-				}
-
-				&:nth-of-type(3) {
-					animation-name: move-user-token-reverse-3;
 				}
 			}
 
 			&.house {
-				&:nth-of-type(1),
-				&:nth-of-type(2),
-				&:nth-of-type(3) {
-					@media (--prm-no-preference) {
-						animation-duration: 1s;
+				transform: translate(55vw, 0%);
+
+				@media (--prm-no-preference) {
+					&:nth-of-type(2) {
+						animation-duration: revert;
 					}
-				}
-
-				&:nth-of-type(1) {
-					animation-name: move-house-token-reverse-1;
-				}
-
-				&:nth-of-type(2) {
-					animation-name: move-house-token-reverse-2;
-				}
-
-				&:nth-of-type(3) {
-					animation-name: move-house-token-reverse-3;
 				}
 			}
 
