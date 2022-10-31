@@ -223,6 +223,7 @@
 
 			&.house {
 				animation-name: move-house-token;
+				animation-delay: 0.5s;
 
 				&:nth-of-type(1) {
 					--house-token-background: var(--bgi-paper);
@@ -237,9 +238,16 @@
 				}
 
 				& > .token {
+					&,
 					&::before,
 					& > .icon {
 						animation-fill-mode: forwards;
+					}
+
+					animation-name: hide-house-token;
+
+					@media (--prm-no-preference) {
+						animation-duration: 2.5s;
 					}
 
 					&::before {
@@ -254,14 +262,21 @@
 						animation-name: reveal-house-token-icon;
 
 						@media (--prm-no-preference) {
-							animation-duration: 4.5s;
+							animation-duration: 4s;
 						}
 					}
 				}
 			}
 
 			&.hidden {
-				display: none;
+				& > .token {
+					animation-name: hide-hidden-token;
+					animation-fill-mode: forwards;
+
+					@media (--prm-no-preference) {
+						animation-duration: 1s;
+					}
+				}
 			}
 		}
 	}
