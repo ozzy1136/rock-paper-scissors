@@ -1,27 +1,25 @@
 export default function Token({
 	tokenName,
+	tokenRef,
+	Icon,
 	tokenClass,
 	isDisabled,
-	tokenRef,
 	handleTokenClick,
-	TokenIcon,
 }) {
 	return (
-		<label
-			className={`token ${tokenClass}`}
-			data-tokentype={tokenName}
-			ref={tokenRef}
-		>
-			<TokenIcon className="icon" />
-			<button
-				className="button sr-only"
-				type="button"
-				disabled={isDisabled}
-				onClick={handleTokenClick}
-				data-tokentype={tokenName}
-			>
-				{tokenName.toUpperCase()}
-			</button>
-		</label>
+		<div className={`token-wrapper ${tokenClass}`} ref={tokenRef}>
+			<label className={`token`}>
+				<Icon className="icon" />
+				<button
+					className="button sr-only"
+					type="button"
+					disabled={isDisabled}
+					onClick={handleTokenClick}
+					data-tokentype={tokenName}
+				>
+					{tokenName}
+				</button>
+			</label>
+		</div>
 	);
 }
