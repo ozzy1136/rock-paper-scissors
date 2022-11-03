@@ -6,6 +6,7 @@
 }
 
 .l-info {
+	max-width: 700px;
 	justify-content: space-between;
 	padding-block: 3vw;
 	padding-inline: 5vw;
@@ -14,6 +15,11 @@
 	border-width: 4px;
 	border-color: hsl(var(--bdc-header));
 	border-radius: var(--bdrs-soft);
+
+	@media screen and (min-width: 768px) {
+		padding-block: 2vw;
+		margin-inline: auto;
+	}
 
 	& > .heading {
 		& > .logo {
@@ -55,6 +61,12 @@
 	margin-block: 10vh;
 	margin-block-end: 6vh;
 	row-gap: 2vh;
+
+	@media screen and (min-width: 1024px) {
+		--user-token-position: translate(calc(35vw - 100%), calc(50%));
+		--house-token-position: translate(65vw, 50%);
+		margin-block-end: 0px;
+	}
 
 	& > .tokens-container {
 		grid-column: full;
@@ -148,11 +160,20 @@
 		text-align: center;
 		position: absolute;
 
+		@media screen and (min-width: 1024px) {
+			width: var(--token-wrapper-height);
+			font-size: 1.5rem;
+		}
+
 		&.user {
 			transform: translate(
 				calc(45vw - 100%),
 				calc(var(--tokens-container-height) * 0.63 + 1.5rem)
 			);
+
+			@media screen and (min-width: 1024px) {
+				transform: translate(calc(35vw - 100%), 0%);
+			}
 		}
 
 		&.house {
@@ -160,11 +181,20 @@
 				calc(55vw),
 				calc(var(--tokens-container-height) * 0.63 + 1.5rem)
 			);
+
+			@media screen and (min-width: 1024px) {
+				transform: translate(65vw, 0%);
+			}
 		}
 	}
 
 	& > .result-wrapper {
 		grid-column: wrapper;
+		position: relative;
+
+		@media screen and (min-width: 1024px) {
+			grid-row-start: 1;
+		}
 
 		& > .result {
 			text-align: center;
@@ -172,11 +202,22 @@
 			font-size: 3rem;
 			font-family: var(--ff-semibold);
 			text-transform: uppercase;
+
+			@media screen and (min-width: 1024px) {
+				position: absolute;
+				transform: translateY(-100%);
+			}
 		}
 	}
 
 	& > .resetButton-wrapper {
 		grid-column: wrapper;
+		position: relative;
+		z-index: 1;
+
+		@media screen and (min-width: 1024px) {
+			grid-row-start: 1;
+		}
 
 		& > .resetButton {
 			width: 70%;
@@ -186,6 +227,12 @@
 			font-family: var(--ff-semibold);
 			letter-spacing: 1px;
 			text-transform: uppercase;
+
+			@media screen and (min-width: 1024px) {
+				width: 10%;
+				position: absolute;
+				transform: translateY(30%);
+			}
 		}
 	}
 }
@@ -195,6 +242,10 @@
 
 	& > .button-wrapper {
 		grid-column: wrapper;
+
+		@media screen and (min-width: 1024px) {
+			justify-content: flex-end;
+		}
 
 		& > .button {
 			background: unset;
@@ -374,6 +425,14 @@
 						animation-duration: revert;
 					}
 				}
+
+				@media screen and (min-width: 1024px) {
+					@media (--prm-no-preference) {
+						&.user {
+							animation-duration: 1s;
+						}
+					}
+				}
 			}
 
 			&:nth-of-type(2) {
@@ -382,6 +441,14 @@
 				@media (--prm-no-preference) {
 					&.house {
 						animation-duration: revert;
+					}
+				}
+
+				@media screen and (min-width: 1024px) {
+					@media (--prm-no-preference) {
+						&.house {
+							animation-duration: 1s;
+						}
 					}
 				}
 			}
