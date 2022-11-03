@@ -61,6 +61,12 @@ export default function TokensContainer({ setScore }) {
 	const [matchState, updateMatchState] = useReducer(matchReducer, matchInit);
 
 	useEffect(() => {
+		if (matchState.winner && matchState.userToken === matchState.winner) {
+			setScore((score) => score + 1);
+		}
+	}, [matchState.winner]);
+
+	useEffect(() => {
 		// Take into account instant animations while other animations are still running (e.g. User paper token reset takes 0.01s while House rock token still takes 1s to complete)
 		let finishedResetAnimations = 0;
 
@@ -85,7 +91,6 @@ export default function TokensContainer({ setScore }) {
 				// At the moment, there is no possibility of a draw, because house token will never be the same as user token
 				if (matchState.userToken === "rock") {
 					if (matchState.houseToken === "scissors") {
-						console.log("winner: ", matchState.userToken);
 						updateMatchState({
 							type: "ready_to_reset",
 							winner: matchState.userToken,
@@ -98,7 +103,6 @@ export default function TokensContainer({ setScore }) {
 					}
 				} else if (matchState.userToken === "scissors") {
 					if (matchState.houseToken === "paper") {
-						console.log("winner: ", matchState.userToken);
 						updateMatchState({
 							type: "ready_to_reset",
 							winner: matchState.userToken,
@@ -111,7 +115,6 @@ export default function TokensContainer({ setScore }) {
 					}
 				} else if (matchState.userToken === "paper") {
 					if (matchState.houseToken === "rock") {
-						console.log("winner: ", matchState.userToken);
 						updateMatchState({
 							type: "ready_to_reset",
 							winner: matchState.userToken,
@@ -230,7 +233,10 @@ export default function TokensContainer({ setScore }) {
 				<>
 					<div className="result-wrapper center-children">
 						<p className="result" aria-live="polite">
-							You win
+							You{" "}
+							{matchState.userToken === matchState.winner
+								? "win"
+								: "lose"}
 						</p>
 					</div>
 					<div className="resetButton-wrapper center-children">
