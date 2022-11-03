@@ -139,7 +139,7 @@
 	}
 
 	& > .label {
-		width: calc(var(--tokens-container-height) * 0.52);
+		width: calc(var(--tokens-container-height) * 0.63);
 		opacity: 0;
 		color: #fff;
 		font-family: var(--ff-bold);
@@ -151,14 +151,14 @@
 		&.user {
 			transform: translate(
 				calc(45vw - 100%),
-				calc(var(--tokens-container-height) * 0.52 + 1.5rem)
+				calc(var(--tokens-container-height) * 0.63 + 1.5rem)
 			);
 		}
 
 		&.house {
 			transform: translate(
 				calc(55vw),
-				calc(var(--tokens-container-height) * 0.52 + 1.5rem)
+				calc(var(--tokens-container-height) * 0.63 + 1.5rem)
 			);
 		}
 	}
@@ -227,8 +227,8 @@
 
 /* State Rules */
 .l-match.is-dueling {
-	--tokens-container-height: min(450px, 60vw);
-	--token-wrapper-height: 52%;
+	--tokens-container-height: min(450px, 50vw);
+	--token-wrapper-height: min(202px, 63%);
 
 	& > .tokens-container {
 		background: unset;
@@ -315,8 +315,8 @@
 
 				&::before {
 					content: "";
-					width: 225%;
-					height: 225%;
+					width: 175%;
+					height: 175%;
 					border-radius: var(--bdrs-round);
 					position: absolute;
 					top: 50%;
