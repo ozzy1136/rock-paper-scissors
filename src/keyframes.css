@@ -1,12 +1,12 @@
 @keyframes move-user-token {
 	100% {
-		transform: translate(calc(45vw - 100%), 0%);
+		transform: var(--user-token-position);
 	}
 }
 
 @keyframes move-house-token {
 	100% {
-		transform: translate(55vw, 0%);
+		transform: var(--house-token-position);
 	}
 }
 

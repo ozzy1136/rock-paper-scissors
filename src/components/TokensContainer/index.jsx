@@ -1,6 +1,5 @@
 import { useEffect, useReducer, useRef } from "react";
 
-import { ReactComponent as Triangle } from "@assets/images/bg-triangle.svg";
 import { ReactComponent as IconPaper } from "@assets/images/icon-paper.svg";
 import { ReactComponent as IconScissors } from "@assets/images/icon-scissors.svg";
 import { ReactComponent as IconRock } from "@assets/images/icon-rock.svg";
@@ -13,6 +12,7 @@ const matchInit = {
 	playAgain: false,
 	userToken: null,
 	houseToken: null,
+	winner: null,
 };
 
 function matchReducer(state, action) {
@@ -30,6 +30,7 @@ function matchReducer(state, action) {
 			return {
 				...state,
 				playAgain: true,
+				winner: action.winner,
 			};
 		}
 		case "reset_match": {
@@ -38,6 +39,7 @@ function matchReducer(state, action) {
 				isDueling: false,
 				isResetting: true,
 				playAgain: false,
+				winner: action.winner,
 			};
 		}
 		case "init_match": {
@@ -59,6 +61,9 @@ export default function TokensContainer({ setScore }) {
 	const [matchState, updateMatchState] = useReducer(matchReducer, matchInit);
 
 	useEffect(() => {
+		// Take into account instant animations while other animations are still running (e.g. User paper token reset takes 0.01s while House rock token still takes 1s to complete)
+		let finishedResetAnimations = 0;
+
 		if (matchState.userToken) {
 			rockToken.current.addEventListener(
 				"animationend",
@@ -77,16 +82,59 @@ export default function TokensContainer({ setScore }) {
 		function handleAnimationEnd(e) {
 			if (/icon$/.test(e.animationName)) {
 				e.stopPropagation();
-				updateMatchState({
-					type: "ready_to_reset",
-				});
+				// At the moment, there is no possibility of a draw, because house token will never be the same as user token
+				if (matchState.userToken === "rock") {
+					if (matchState.houseToken === "scissors") {
+						console.log("winner: ", matchState.userToken);
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.userToken,
+						});
+					} else {
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.houseToken,
+						});
+					}
+				} else if (matchState.userToken === "scissors") {
+					if (matchState.houseToken === "paper") {
+						console.log("winner: ", matchState.userToken);
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.userToken,
+						});
+					} else {
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.houseToken,
+						});
+					}
+				} else if (matchState.userToken === "paper") {
+					if (matchState.houseToken === "rock") {
+						console.log("winner: ", matchState.userToken);
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.userToken,
+						});
+					} else {
+						updateMatchState({
+							type: "ready_to_reset",
+							winner: matchState.houseToken,
+						});
+					}
+				}
 			}
 
 			if (/^reset/.test(e.animationName)) {
 				e.stopPropagation();
-				updateMatchState({
-					type: "init_match",
-				});
+				// Only set initial match state after all tokens are back in their initial place
+				if (finishedResetAnimations > 1) {
+					updateMatchState({
+						type: "init_match",
+					});
+				} else {
+					finishedResetAnimations++;
+				}
 			}
 		}
 
@@ -132,7 +180,6 @@ export default function TokensContainer({ setScore }) {
 					: ""
 			}`}
 		>
-			<Triangle className="background" />
 			<div className="tokens-container">
 				{[
 					["paper", paperToken, IconPaper],
@@ -152,6 +199,9 @@ export default function TokensContainer({ setScore }) {
 								: matchState.isDueling || matchState.isResetting
 								? "hidden"
 								: ""
+						}
+						winnerClass={
+							matchState.winner === curr[0] ? "winner" : ""
 						}
 						isDisabled={
 							matchState.isDueling || matchState.isResetting
@@ -178,9 +228,11 @@ export default function TokensContainer({ setScore }) {
 			</p>
 			{matchState.playAgain && (
 				<>
-					{/* <p className="result" aria-live="polite">
-						You win
-					</p> */}
+					<div className="result-wrapper center-children">
+						<p className="result" aria-live="polite">
+							You win
+						</p>
+					</div>
 					<div className="resetButton-wrapper center-children">
 						<button
 							className="resetButton"

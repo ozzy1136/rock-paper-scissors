@@ -3,11 +3,15 @@ export default function Token({
 	tokenRef,
 	Icon,
 	tokenClass,
+	winnerClass,
 	isDisabled,
 	handleTokenClick,
 }) {
 	return (
-		<div className={`token-wrapper ${tokenClass}`} ref={tokenRef}>
+		<div
+			className={`token-wrapper ${tokenClass} ${winnerClass}`}
+			ref={tokenRef}
+		>
 			<label className={`token`}>
 				<Icon className="icon" />
 				<button

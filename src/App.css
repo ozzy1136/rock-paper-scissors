@@ -1,7 +1,8 @@
 @import "keyframes.css";
 
 .l-page {
-	padding-block: 8vh;
+	padding-block-start: 6vh;
+	padding-block-end: 8vh;
 }
 
 .l-info {
@@ -46,29 +47,29 @@
 .l-match {
 	--tokens-container-height: min(450px, 70vw);
 	--token-wrapper-height: 45%;
+	--user-token-position: translate(calc(45vw - 100%), 0%);
+	--house-token-position: translate(55vw, 0%);
 
+	min-height: 360px;
 	position: relative;
-	margin-block: 14vh;
-
-	& > .background {
-		width: min(450px, 55%);
-		height: 70%;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
+	margin-block: 10vh;
+	margin-block-end: 6vh;
+	row-gap: 2vh;
 
 	& > .tokens-container {
 		grid-column: full;
+		grid-row-start: 1;
 		height: var(--tokens-container-height);
 		position: relative;
+		background-image: url("./assets/images/bg-triangle.svg");
+		background-repeat: no-repeat;
+		background-size: min(450px, 50vw) 50%;
+		background-position: center;
 
 		& > .token-wrapper {
 			position: absolute;
 			height: var(--token-wrapper-height);
 			aspect-ratio: 1;
-			overflow: hidden;
 
 			&:focus-within {
 				outline: auto;
@@ -138,11 +139,10 @@
 	}
 
 	& > .label {
-		width: calc(var(--tokens-container-height) * 0.45);
+		width: calc(var(--tokens-container-height) * 0.52);
 		opacity: 0;
 		color: #fff;
 		font-family: var(--ff-bold);
-		font-size: 1.5rem;
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		text-align: center;
@@ -151,20 +151,42 @@
 		&.user {
 			transform: translate(
 				calc(45vw - 100%),
-				calc(var(--tokens-container-height) * 0.45 + 2rem)
+				calc(var(--tokens-container-height) * 0.52 + 1.5rem)
 			);
 		}
 
 		&.house {
 			transform: translate(
 				calc(55vw),
-				calc(var(--tokens-container-height) * 0.45 + 2rem)
+				calc(var(--tokens-container-height) * 0.52 + 1.5rem)
 			);
+		}
+	}
+
+	& > .result-wrapper {
+		grid-column: wrapper;
+
+		& > .result {
+			text-align: center;
+			color: #fff;
+			font-size: 3rem;
+			font-family: var(--ff-semibold);
+			text-transform: uppercase;
 		}
 	}
 
 	& > .resetButton-wrapper {
 		grid-column: wrapper;
+
+		& > .resetButton {
+			width: 70%;
+			padding-block: 1rem;
+			background-color: #fff;
+			border-radius: var(--bdrs-soft);
+			font-family: var(--ff-semibold);
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
 	}
 }
 
@@ -205,11 +227,12 @@
 
 /* State Rules */
 .l-match.is-dueling {
-	& > .background {
-		display: none;
-	}
+	--tokens-container-height: min(450px, 60vw);
+	--token-wrapper-height: 52%;
 
 	& > .tokens-container {
+		background: unset;
+
 		& > .token-wrapper {
 			&.user,
 			&.house {
@@ -218,6 +241,11 @@
 				@media (--prm-no-preference) {
 					animation-duration: 1s;
 				}
+			}
+
+			&.house,
+			&.hidden {
+				overflow: hidden;
 			}
 
 			&.user {
@@ -281,6 +309,27 @@
 					}
 				}
 			}
+
+			&.winner {
+				overflow: unset;
+
+				&::before {
+					content: "";
+					width: 225%;
+					height: 225%;
+					border-radius: var(--bdrs-round);
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					background-image: radial-gradient(
+						rgba(255, 255, 255, 0.08) 40%,
+						40%,
+						rgba(255, 255, 255, 0.05) 53%,
+						rgba(255, 255, 255, 0.03) 53%
+					);
+				}
+			}
 		}
 	}
 
@@ -309,10 +358,6 @@
 }
 
 .l-match.is-resetting {
-	& > .background {
-		display: none;
-	}
-
 	& > .tokens-container {
 		& > .token-wrapper {
 			animation-fill-mode: forwards;
@@ -323,38 +368,40 @@
 
 			&:nth-of-type(1) {
 				animation-name: reset-move-token-1;
+
+				@media (--prm-no-preference) {
+					&.user {
+						animation-duration: revert;
+					}
+				}
 			}
 
 			&:nth-of-type(2) {
 				animation-name: reset-move-token-2;
+
+				@media (--prm-no-preference) {
+					&.house {
+						animation-duration: revert;
+					}
+				}
 			}
 
 			&:nth-of-type(3) {
 				animation-name: reset-move-token-3;
+
+				@media (--prm-no-preference) {
+					&.hidden {
+						animation-duration: revert;
+					}
+				}
 			}
 
 			&.user {
-				transform: translate(calc(45vw - 100%), 0%);
-
-				@media (--prm-no-preference) {
-					&:nth-of-type(1) {
-						animation-duration: revert;
-					}
-				}
+				transform: var(--user-token-position);
 			}
 
 			&.house {
-				transform: translate(55vw, 0%);
-
-				@media (--prm-no-preference) {
-					&:nth-of-type(2) {
-						animation-duration: revert;
-					}
-				}
-			}
-
-			&.hidden {
-				display: revert;
+				transform: var(--house-token-position);
 			}
 		}
 	}
