@@ -26,7 +26,6 @@ function matchReducer(state, action) {
 			};
 		}
 		case "ready_to_reset": {
-			// TODO focus play again button after ready_to_reset
 			return {
 				...state,
 				playAgain: true,
@@ -37,9 +36,8 @@ function matchReducer(state, action) {
 			return {
 				...state,
 				isDueling: false,
-				isResetting: true,
 				playAgain: false,
-				winner: action.winner,
+				isResetting: true,
 			};
 		}
 		case "init_match": {
@@ -58,16 +56,22 @@ export default function TokensContainer({ setScore }) {
 	const rockToken = useRef(null);
 	const paperToken = useRef(null);
 	const scissorsToken = useRef(null);
+	const resetButton = useRef(null);
 	const [matchState, updateMatchState] = useReducer(matchReducer, matchInit);
 
+	// matchState.winner is only set after reset_match is dispatched
 	useEffect(() => {
-		if (matchState.winner && matchState.userToken === matchState.winner) {
-			setScore((score) => score + 1);
+		if (!!matchState.winner) {
+			resetButton.current.focus();
+
+			if (matchState.userToken === matchState.winner) {
+				setScore((score) => score + 1);
+			}
 		}
 	}, [matchState.winner]);
 
 	useEffect(() => {
-		// Take into account instant animations while other animations are still running (e.g. User paper token reset takes 0.01s while House rock token still takes 1s to complete)
+		// Take into account instant animations while other animations are still running (e.g. On mobile, user paper token reset takes 0.01s while house rock token still takes 1s to complete)
 		let finishedResetAnimations = 0;
 
 		if (matchState.userToken) {
@@ -86,8 +90,10 @@ export default function TokensContainer({ setScore }) {
 		}
 
 		function handleAnimationEnd(e) {
+			// reveal-house-token-icon is the last animation to end after a token is clicked
 			if (/icon$/.test(e.animationName)) {
 				e.stopPropagation();
+
 				// At the moment, there is no possibility of a draw, because house token will never be the same as user token
 				if (matchState.userToken === "rock") {
 					if (matchState.houseToken === "scissors") {
@@ -128,6 +134,7 @@ export default function TokensContainer({ setScore }) {
 				}
 			}
 
+			// Reset animation ends when a token is back in initial place
 			if (/^reset/.test(e.animationName)) {
 				e.stopPropagation();
 				// Only set initial match state after all tokens are back in their initial place
@@ -213,43 +220,44 @@ export default function TokensContainer({ setScore }) {
 					/>
 				))}
 			</div>
-			<p className="label user" aria-live="polite">
+			{/* TODO figure out aria-live to announce the picked tokens */}
+			<p className="label user">
 				{matchState.isDueling && (
-					<span>
+					<>
 						You picked
 						<span className="sr-only">{matchState.userToken}</span>
-					</span>
+					</>
 				)}
 			</p>
-			<p className="label house" aria-live="polite">
+			<p className="label house">
 				{matchState.isDueling && (
-					<span>
+					<>
 						The house picked
 						<span className="sr-only">{matchState.houseToken}</span>
-					</span>
+					</>
 				)}
 			</p>
-			{matchState.playAgain && (
-				<>
-					<div className="result-wrapper center-children">
-						<p className="result" aria-live="polite">
-							You{" "}
-							{matchState.userToken === matchState.winner
-								? "win"
-								: "lose"}
-						</p>
-					</div>
-					<div className="resetButton-wrapper center-children">
-						<button
-							className="resetButton"
-							type="button"
-							onClick={handleResetClick}
-						>
-							Play again
-						</button>
-					</div>
-				</>
-			)}
+			<div className="result-wrapper center-children">
+				<p className="result" aria-live="polite" aria-relevant="text">
+					{matchState.playAgain &&
+						(matchState.userToken === matchState.winner
+							? "You win"
+							: "You lose")}
+				</p>
+			</div>
+			<div className="resetButton-wrapper center-children">
+				{matchState.playAgain && (
+					<button
+						className="resetButton"
+						type="button"
+						onClick={handleResetClick}
+						ref={resetButton}
+						data-reset-button
+					>
+						Play again
+					</button>
+				)}
+			</div>
 		</div>
 	);
 }
