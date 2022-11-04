@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 304 270">
 	<defs>
-		<linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%">
+		<linearGradient id="rules-gradient-a" x1="50%" x2="50%" y1="0%" y2="100%">
 			<stop offset="0%" stop-color="#FFF" stop-opacity=".097" />
 			<stop offset="100%" stop-color="#FFF" stop-opacity="0" />
 		</linearGradient>
-		<linearGradient id="b" x1="50%" x2="50%" y1="0%" y2="100%">
+		<linearGradient id="rules-gradient-b" x1="50%" x2="50%" y1="0%" y2="100%">
 			<stop offset="0%" stop-color="#FFF" stop-opacity=".097" />
 			<stop offset="100%" stop-color="#FFF" stop-opacity="0" />
 		</linearGradient>
 	</defs>
 	<g fill="none" fill-rule="evenodd">
 		<ellipse cx="53.189" cy="54.815" fill="#B1B4C5" rx="53.189" ry="54.815" />
-		<ellipse cx="53.189" cy="52.385" fill="url(#a)" rx="53.189" ry="52.385" />
+		<ellipse cx="53.189" cy="52.385" fill="url(#rules-gradient-a)" rx="53.189" ry="52.385" />
 		<g transform="translate(12.357 12.421)">
 			<ellipse cx="40.832" cy="41.044" fill="#E1E4ED" rx="40.832" ry="41.044" />
 			<path fill="#8A90AC" fill-rule="nonzero"
@@ -19,7 +19,7 @@
 		</g>
 		<g transform="translate(196)">
 			<ellipse cx="53.686" cy="54.815" fill="#B1B4C5" rx="53.686" ry="54.815" />
-			<ellipse cx="53.686" cy="52.385" fill="url(#b)" rx="53.686" ry="52.385" />
+			<ellipse cx="53.686" cy="52.385" fill="url(#rules-gradient-b)" rx="53.686" ry="52.385" />
 			<g transform="translate(12.473 12.421)">
 				<ellipse cx="41.214" cy="41.044" fill="#E1E4ED" rx="41.214" ry="41.044" />
 				<path fill="#8A90AC" fill-rule="nonzero"
