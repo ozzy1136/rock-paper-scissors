@@ -390,7 +390,6 @@
 
 				@media (--prm-no-preference) {
 					animation-delay: 0.5s;
-					animation-duration: 2.5s;
 				}
 
 				&:nth-of-type(1) {
@@ -413,6 +412,10 @@
 					}
 
 					animation-name: hide-house-token;
+
+					@media (--prm-no-preference) {
+						animation-duration: 2.5s;
+					}
 
 					&::before {
 						animation-name: tween-house-token-background;
