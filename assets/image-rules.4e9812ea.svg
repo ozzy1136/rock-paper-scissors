@@ -34,14 +34,11 @@
 				<path fill="#8A90AC" fill-rule="nonzero"
 					d="M57.179 35.15c-.475-5.997-7.208-5.385-7.208-5.385-2.842-5.01-7.281-1.381-7.281-1.381-3.41-4.911-7.687-.36-7.687-.36-7.373-.796-7.087 5.234-7.087 5.234-.173 1.917 1.04 7.847 1.04 7.847-1.094-3.418-3.467-.581-3.467-.581-2.917 4.502-.721 6.967-.721 6.967 3.947 4.626 12.357 10.18 12.357 10.18 3.046 1.745 1.757 3.3 1.757 3.3l18.42-3.044.424-3.494c2.8-8.472-.547-19.284-.547-19.284z" />
 			</g>
-		</g><text fill="#B1B4C5" font-family="BarlowSemiCondensed-Bold, Barlow Semi Condensed" font-size="13"
-			font-style="condensed" font-weight="bold">
+		</g><text fill="#B1B4C5" font-family="var(--ff-bold)" font-size="13" font-weight="bold">
 			<tspan x="134" y="31">BEATS</tspan>
-		</text><text fill="#B1B4C5" font-family="BarlowSemiCondensed-Bold, Barlow Semi Condensed" font-size="13"
-			font-style="condensed" font-weight="bold">
+		</text><text fill="#B1B4C5" font-family="var(--ff-bold)" font-size="13" font-weight="bold">
 			<tspan x="40" y="147">BEATS</tspan>
-		</text><text fill="#B1B4C5" font-family="BarlowSemiCondensed-Bold, Barlow Semi Condensed" font-size="13"
-			font-style="condensed" font-weight="bold">
+		</text><text fill="#B1B4C5" font-family="var(--ff-bold)" font-size="13" font-weight="bold">
 			<tspan x="235" y="147">BEATS</tspan>
 		</text>
 		<g fill="#B1B4C5" transform="matrix(-1 0 0 1 177 39)">
