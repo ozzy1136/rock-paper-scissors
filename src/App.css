@@ -387,7 +387,11 @@
 
 			&.house {
 				animation-name: move-house-token;
-				animation-delay: 0.5s;
+
+				@media (--prm-no-preference) {
+					animation-delay: 0.5s;
+					animation-duration: 2.5s;
+				}
 
 				&:nth-of-type(1) {
 					--house-token-background: var(--bgi-paper);
@@ -409,10 +413,6 @@
 					}
 
 					animation-name: hide-house-token;
-
-					@media (--prm-no-preference) {
-						animation-duration: 2.5s;
-					}
 
 					&::before {
 						animation-name: tween-house-token-background;
