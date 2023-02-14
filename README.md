@@ -56,6 +56,6 @@ Aria attributes are another area that I need to continue to learn about. Especia
 
 ## Author
 
--   Website - Soon &#8594; [Ozmar Mendoza](https://ozzy1136.github.io)
+-   Website - [Ozmar Mendoza](https://ozzy1136.github.io)
 -   Frontend Mentor - [@ozzy1136](https://www.frontendmentor.io/profile/ozzy1136)
 -   Twitter - [@11_crack](https://www.twitter.com/11_crack)
