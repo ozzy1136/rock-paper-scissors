@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from "@assets/images/logo.svg";
 import { ReactComponent as IconClose } from "@assets/images/icon-close.svg";
 import { ReactComponent as ImgRules } from "@assets/images/image-rules.svg";
 
+import GithubLink from "@components/GithubLink";
 import TokensContainer from "@components/TokensContainer";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
 
 	return (
 		<div className="l-page">
+			<GithubLink />
 			<main>
 				<div className="l-info center-children">
 					<div className="heading">

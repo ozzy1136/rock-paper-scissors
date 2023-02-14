@@ -1,7 +1,22 @@
 @import "keyframes.css";
 
+.github {
+	padding: 0.75em;
+	color: #000;
+	position: absolute;
+	top: 0;
+	background-color: #fff;
+}
+
+.github-logo {
+	width: 1.5em;
+	height: 1.5em;
+	margin-inline-start: 0.75em;
+	vertical-align: bottom;
+}
+
 .l-page {
-	padding-block-start: 6vh;
+	padding-block-start: 15vh;
 	padding-block-end: 8vh;
 }
 
